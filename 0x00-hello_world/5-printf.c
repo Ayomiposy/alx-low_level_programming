@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 /**
- * main - defines the entry point for the prpogram
+ * main - Defines the entry point for the prpogram
  *
- * Return: return zero if errors, if not return non zero if no errors
+ * Return: Returns zero if errors, if not returns non-zero if no errors.
  */
 int main(void)
 {
