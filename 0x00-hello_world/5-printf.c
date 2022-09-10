@@ -3,7 +3,7 @@
 /**
  * main - defines the entry point for the prpogram
  *
- * Return: return 0 if errors, if not return non zero if no errors
+ * Return: return zero if errors, if not return non zero if no errors
  */
 int main(void)
 {
