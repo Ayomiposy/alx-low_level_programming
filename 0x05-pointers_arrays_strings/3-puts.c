@@ -1,19 +1,18 @@
 #include "main.h"
 
 /**
- * _strlen - return the length of a string
- *
- * @s: the string pointer
- *
- * Return: the length of string
- *
+ * _puts - print a string to stdout
+ * @str: char array string type
+ * Description: can only use _putchar
  */
 
 void _puts(char *str)
 {
-while (*str)
-{
-	_putchar(*str++);
-}
-_putchar('\n');
+	int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		_putchar(str[i]);
+	}
+	_putchar('\n');
 }
