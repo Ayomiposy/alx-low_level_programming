@@ -8,11 +8,12 @@
  *
  * Return: the length of string
  *
- */ 
+ */
 
-void _puts(char *str);
+void _puts(char *str)
+
+while (*str)
 {
-        _putchar(strlen(s));
-	_putchar('\n');
+	_putchar(*str++);
 }
-
+_putchar('\n');
