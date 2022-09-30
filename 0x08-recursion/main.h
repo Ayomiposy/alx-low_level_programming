@@ -6,4 +6,6 @@ int factorial(int n);
 int _pow_recursion(int x, int y);
 int _evaluate(int i, int n);
 int evaluate_num(int num, int iterator);
+int _strlen_recursion(char *s);
+
 
