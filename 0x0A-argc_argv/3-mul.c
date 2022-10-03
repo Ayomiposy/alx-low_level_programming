@@ -11,15 +11,15 @@
 
 int main(int argc, char *argv[])
 {
-	int i, mul = 0;
+	int i, j;
 
-	if (argc > 0)
+	if (argc == 3)
 	{
-		for (i = 0; i <= 2; i++)
-		{
-			mul = atoi(argv[1]) * atoi(argv[2]);
-		}
-		printf("%d\n", mul);
+		i = atoi(argv[1]);
+
+		j = atoi(argv[2]);
+
+		printf("%d\n", i * j)
 	}
 	else
 	{
