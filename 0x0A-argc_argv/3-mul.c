@@ -6,7 +6,7 @@
  * @argc: Counts Arguments
  * @argv: The Arguments counted
  *
- * Return: Always 1
+ * Return: Always 0 if true, otherwise return 1i
  */
 
 int main(int argc, char *argv[])
@@ -15,16 +15,14 @@ int main(int argc, char *argv[])
 
 	if (argc == 3)
 	{
-		i = atoi(argv[1]);
+	i = atoi(argv[1]);
 
-		j = atoi(argv[2]);
+	j = atoi(argv[2]);
 
-		printf("%d\n", i * j);
+	printf("%d\n", i * j);
+	return (0);
 	}
-	else
-	{
-		printf("Error\n");
-	}
+	
+	printf("Error\n");
 	return (1);
-
 }
