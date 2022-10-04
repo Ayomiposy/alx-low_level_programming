@@ -12,8 +12,7 @@
 
 int main(int argc, char *argv[])
 {
-	int sum = 0;
-	int i, j;
+	int i, j, sum = 0;
 
 	for (i = 1; i < argc; i++)
 	{
