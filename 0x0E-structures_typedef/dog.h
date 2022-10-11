@@ -1,4 +1,3 @@
-#ifndef DOG_FILE
 #define DOG_FILE
 
 /**
