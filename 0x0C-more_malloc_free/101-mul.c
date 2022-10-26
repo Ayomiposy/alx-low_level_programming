@@ -1,143 +1,151 @@
-#include <stdlib.h>
 #include "main.h"
+#include <stdlib.h>
 
-/**
- * _prntstr - prints a string
- *
- * @s: string to print
- */
-void _prntstr(char *s)
+/
+ * _atoi_digit - convert a char to integer.
+ * @x: character to convert.
+ * Return: integer.
+ /
+
+int _atoi_digit(char x)
 {
-	while (*s)
-		_putchar(*s++);
+  unsigned int res;
+
+  if (x <= '9' && x >= '0')
+    res = x - '0';
+  return (res);
+}
+
+/
+ * _isNumber - Define if a string is a number.
+ * @argv: Pointer to string.
+ * Return: success (0).
+ /
+int _isNumber(char *argv)
+{
+  int i;
+
+  for (i = 0; argv[i]; i++)
+    if (argv[i] < 48  argv[i] > 57)
+      return (1);
+  return (0);
 }
 
 /**
- * numstrchk - checks arg array to see if the are numeric strings, converts
- * from ascii to byte int, and returns their length. Segfault on null pointer.
- *
- * @s: string to check
- *
- * Return: Length of string. Exit 98 if not numeric.
- */
-long int numstrchk(char *s)
+ *_calloc - allocate array of size * nmemb.
+ * @nmemb: number of elements.
+ * @size: size of element.
+ * Return: pointer to array.
+ **/
+
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	long int len = 0;
+  char *tab;
+  unsigned int i;
 
-	if (*s == 0)
-	{
-		_prntstr("Error\n");
-		exit(98);
-	}
+  tab = malloc(size * nmemb);
 
-	while (*s)
-	{
-		if (*s < '0' || *s > '9')
-		{
-			_prntstr("Error\n");
-			exit(98);
-		}
-		*s -= '0';
-		len++;
-		s++;
-	}
-	return (len);
+  if (tab == NULL)
+    return (NULL);
+
+  for (i = 0; i < (size * nmemb); i++)
+    tab[i] = '0';
+
+  return (tab);
 }
 
 /**
- * _calloc_buffer - allocate a block of memory of size * num and init to '0'
- *
- * @num: number of elements to allocate
- * @size: size of element
- *
- * Return: pointer to allocated space, exit 98 on failure
- */
-void *_calloc_buffer(long int num, long int size)
+ * mul_array - multiply two arrays.
+ * @a1: first array.
+ * @len1: length of array a1.
+ * @a2:  char.
+ * @a3: array for result.
+ * @lena: length of array a3.
+ * Return: pointer to array.
+ **/
+
+void *mul_array(char *a1, int len1, char a2, char *a3, int lena)
 {
-	void *ret;
-	char *ptr;
+  int mul = 0, i, k;
 
-	ret = malloc(num * size);
-	if (ret == 0)
-	{
-		exit(98);
-	}
+  k = lena;
+  for (i = len1 - 1; i >= 0 ; i--)
+  {
+    mul += (a1[i] - '0') * (a2 - '0') + (a3[k] - '0');
+    a3[k] = (mul % 10) + '0';
+    mul /= 10;
+    k--;
+  }
 
-	size = size * num;
-	ptr = ret;
-	ptr[--size] = 0;
-	while (size--)
-		ptr[size] = '0';
+    while (mul != 0)
+    {
+      mul += a3[k] - '0';
+      a3[k] = (mul % 10) + '0';
+      mul /= 10;
+      k--;
+    }
 
-	return (ret);
+  return (a3);
+}
+/**
+ * print_array - print all digits of array.
+ * @nb: number of elements to print.
+ * @a: array of elements.
+ **/
+void print_array(char *a, int nb)
+{
+  int i = 0;
+
+  while (a[i] == '0' && (i + 1) < nb)
+  {
+    i++;
+  }
+  for (; i < nb; i++)
+  {
+    _putchar(a[i]);
+  }
+  _putchar('\n');
 }
 
 /**
- * trimzero - moves pointer position to after last leading 0 in a string,
- * or last zero if all zeros
- *
- * @s: char * we want to move
- *
- * Return: new position
+ *main - print the multiplication of 2 numbers.
+ *@argc: array length.
+ *@argv: array.
+ *Return: 0.
  */
-char *trimzero(char *s)
+
+int main(int argc, char *argv[])
 {
-	while (*s == '0')
-		if (*(s + 1) != 0)
-			s++;
-		else
-			break;
-	return (s);
-}
+  int i, c, len1, len2, lenres;
+  char E[6] = {'E', 'r', 'r', 'o', 'r', '\n'};
+  char *tabres;
 
-/**
- * main - multiply two  positive integer strings of arbitrary size
- *
- * @ac: number of arguments
- * @av: arugments
- *
- * Return: 0 if successful, 98 if failure
- */
-int main(int ac, char **av)
-{
-	long int len1, len2, lenres, i, j;
-	char *res;
-
-	if (ac != 3)
-	{
-		_prntstr("Error\n");
-		return (98);
-	}
-	av[2] = trimzero(av[2]);
-	av[1] = trimzero(av[1]);
-	if (*av[1] == '0' || *av[2] == '0')
-	{
-		_prntstr("0\n");
-		return (0);
-	}
-	len1 = numstrchk(av[1]);
-	len2 = numstrchk(av[2]);
-	lenres = len1 + len2;
-	res = _calloc_buffer(lenres + 1, sizeof(char));
-
-	for (i = lenres - 1, len1--; len1 >= 0; len1--, i += len2 - 1)
-		for (j = len2 - 1; j >= 0; j--, i--)
-		{
-			res[i] = (av[1][len1] * av[2][j] % 10) + res[i];
-			res[i - 1] = (av[1][len1] * av[2][j] / 10) + res[i - 1];
-			if (res[i] > '9')
-			{
-				res[i] -= 10;
-				res[i - 1]++;
-			}
-		}
-
-	if (*res == '0')
-		_prntstr(res + 1);
-	else
-		_prntstr(res);
-	_putchar('\n');
-	free(res);
-
-	return (0);
+  if (argc != 3  _isNumber(argv[1]) == 1 || _isNumber(argv[2]) == 1)
+  {
+    for (i = 0; i < 6; i++)
+    {
+      _putchar(E[i]);
+    }
+    exit(98);
+  }
+  for (len1 = 0; argv[1][len1]; len1++)
+  ;
+  for (len2 = 0; argv[2][len2]; len2++)
+  ;
+  lenres = len1 + len2;
+  tabres = _calloc(lenres, sizeof(int));
+  if (tabres == NULL)
+  {
+    free(tabres);
+    return (0);
+  }
+  for (i = len2 - 1, c = 0; i >= 0; i--)
+  {
+  tabres = mul_array(argv[1], len1, argv[2][i], tabres, (lenres - 1 - c));
+  c++;
+  }
+  print_array(tabres, lenres);
+  free(tabres);
+  exit(EXIT_SUCCESS);
+  return (0);
 }
