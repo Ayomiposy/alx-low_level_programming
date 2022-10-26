@@ -1,5 +1,5 @@
+#include "main.h"
 #include <stdlib.h>
-#include "holberton.h"
 
 /**
  * _prntstr - prints a string
