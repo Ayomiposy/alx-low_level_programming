@@ -1,1 +1,1 @@
-This folder will help to understand c basics
+Understanding C programming. Low level programming
